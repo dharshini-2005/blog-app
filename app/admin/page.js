@@ -7,14 +7,16 @@ import { blogs } from "../../data/blogs";
 export default function AdminPage() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [image, setImage] = useState(""); // New state for image URL
   const router = useRouter();
 
   const handleAdd = () => {
     const slug = title.toLowerCase().replace(/ /g, "-");
-    blogs.push({ title, desc, slug });
+    blogs.push({ title, desc, slug, image }); // Include image URL
     alert("Blog added!");
     setTitle("");
     setDesc("");
+    setImage(""); // Reset image field too
   };
 
   return (
@@ -30,6 +32,11 @@ export default function AdminPage() {
         value={desc}
         onChange={(e) => setDesc(e.target.value)}
       ></textarea>
+      <input
+        placeholder="Image URL"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+      />
       <button onClick={handleAdd}>Add Blog</button>
     </div>
   );
